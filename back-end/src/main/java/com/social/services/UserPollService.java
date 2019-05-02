@@ -9,7 +9,7 @@ public interface UserPollService {
 
     UserPoll createVoteForPoll(User user, Poll poll, boolean choice);
 
-    UserPoll changeDecision(User user, Poll poll, boolean choice);
+    UserPoll changeDecision(User user, Poll poll, Boolean choice, Boolean oldChoice);
 
-    void voteForPoll(User user, Poll poll, Boolean choice);
+    void voteForPoll(User user, Poll poll, Boolean newChoice);
 }

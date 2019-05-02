@@ -18,7 +18,6 @@ export class PollsContainerComponent {
 
   @Input()
   set data (data: PollForm[]) {
-    console.log('ddd');
     this._data = data;
     this.setForm(data);
   }
@@ -58,12 +57,12 @@ export class PollsContainerComponent {
   }
 
   createPoll(question: string) {
-    this.pollsService.createPoll(question).subscribe();
-    this.fetchNew.emit();
+    this.pollsService.createPoll(question).subscribe(param => this.fetchNew.emit());
+    ;
   }
 
   sendVote(options) {
-    this.pollsService.sendVote(options).subscribe();
-    this.fetchNew.emit();
+    this.pollsService.sendVote(options).subscribe(param => this.fetchNew.emit());
   }
+
 }

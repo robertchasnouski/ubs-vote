@@ -37,12 +37,14 @@ public class PollServiceImpl implements PollService {
                     allPolls.get(j).setStatus(pollVotings.get(i).getAttempt() >= 2 ? EStatus.CLOSED.toString() : EStatus.VOTED.toString());
                     if(allPolls.get(j).getStatus().equals(EStatus.CLOSED.toString()))
                         allPolls.get(j).setCanVote(false);
+                    else
+                        allPolls.get(j).setCanVote(true);
                     allPolls.get(j).setUserChoice(pollVotings.get(i).isFavorChoice());
                 }
             }
         }
         for (Poll poll : allPolls) {
-            if(poll.getStatus() == null || poll.getStatus().length() == 0) {
+            if(poll.getCanVote() == null) {
                 poll.setStatus(EStatus.NEW.toString());
                 poll.setUserChoice(null);
                 poll.setCanVote(true);

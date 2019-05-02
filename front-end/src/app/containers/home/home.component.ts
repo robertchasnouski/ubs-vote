@@ -27,9 +27,8 @@ export class HomeComponent implements OnInit {
   }
 
   fetchPolls() {
-    console.log("FETCH");
     this.pollsService.fetchPolls().subscribe(allPolls => {
-      console.log(allPolls);
+      console.log("FETCHED POLLS:",allPolls);
       this.pollsForm = serializePollsToPollsForm(allPolls);
 
     });

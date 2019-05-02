@@ -41,21 +41,25 @@ public class UserPollServiceImpl implements UserPollService {
     }
 
     @Override
-    public UserPoll changeDecision(User user, Poll poll, boolean choice) {
+    public UserPoll changeDecision(User user, Poll poll, Boolean newChoice, Boolean oldChoice) {
 
-        if(choice) {
-            poll.setFavorVoteCount(poll.getFavorVoteCount()+1);
-            poll.setUnderdogVoteCount(poll.getUnderdogVoteCount()-1);
+        if(newChoice) {
+            if(oldChoice == false) {
+                poll.setFavorVoteCount(poll.getFavorVoteCount() + 1);
+                poll.setUnderdogVoteCount(poll.getUnderdogVoteCount() - 1);
+            }
         } else {
-            poll.setFavorVoteCount(poll.getFavorVoteCount()-1);
-            poll.setUnderdogVoteCount(poll.getUnderdogVoteCount()+1);
+            if(oldChoice) {
+                poll.setFavorVoteCount(poll.getFavorVoteCount() - 1);
+                poll.setUnderdogVoteCount(poll.getUnderdogVoteCount() + 1);
+            }
         }
 
         pollRepository.saveAndFlush(poll);
 
         UserPoll userPoll = userPollRepository.findUserPollByUserIdAndPollId(user.getId(),poll.getId());
         userPoll.setAttempt(2);
-        userPoll.setFavorChoice(choice);
+        userPoll.setFavorChoice(newChoice);
 
         return  userPollRepository.saveAndFlush(userPoll);
     }
@@ -67,7 +71,7 @@ public class UserPollServiceImpl implements UserPollService {
         if(userPoll == null) {
             createVoteForPoll(user,poll,choice);
         } else {
-            changeDecision(user,poll,choice);
+            changeDecision(user,poll,choice, userPoll.isFavorChoice());
         }
     }
 

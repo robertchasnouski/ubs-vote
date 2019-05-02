@@ -21,7 +21,11 @@ export class PollComponent implements OnInit{
   }
 
   sendVote(vote: boolean) {
-    this.userVoted.emit({id: this.poll.id, userChoice: vote})
+
+    if(this.isRetryVoting) {
+      console.log("SENDing VOTE ");
+      this.userVoted.emit({id: this.poll.id, userChoice: vote});
+    }
   }
 
 

@@ -60,7 +60,7 @@ public class PollController {
 
         for (int i = 0; i < polls.size(); i++) {
 
-            logger.info("ID:"+polls.get(i).getId()+" ; FAVOR COUNT:"+polls.get(i).getFavorVoteCount());
+            logger.info("ID:"+polls.get(i).getId()+" ; FAVOR COUNT:"+polls.get(i).getFavorVoteCount()+";CanVote:"+polls.get(i).getCanVote());
         }
         return polls;
     }
