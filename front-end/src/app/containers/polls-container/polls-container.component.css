@@ -1,0 +1,16 @@
+.newPoll {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1em 1em 2em 1em;
+}
+
+.newPollBtn {
+  display: flex;
+  margin: auto;
+  width: 30%;
+  background-color: gainsboro;
+}
+
+.mat-button-wrapper {
+  margin: auto
+}

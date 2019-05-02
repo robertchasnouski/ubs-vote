@@ -1,0 +1,18 @@
+<div class="container">
+  <form [formGroup]="form">
+    <h2>Polls</h2>
+    <div formArrayName="polls" *ngFor="let poll of form.controls.polls?.value; let i = index">
+      <ng-container [formGroupName]="i">
+        <app-poll
+          [poll]="poll"
+          (userVoted)="sendVote($event)"
+        ></app-poll>
+      </ng-container>
+    </div>
+    <app-new-poll
+    (createNew)="createPoll($event)"
+    ></app-new-poll>
+<!--    <pre>{{form.value | json}}</pre>-->
+  </form>
+
+</div>

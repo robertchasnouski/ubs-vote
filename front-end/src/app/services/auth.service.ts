@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions,Response} from '@angular/http';
 import {User} from "../model/model.user";
 import 'rxjs/add/operator/map';
 import {AppComponent} from "../app.component";
+import {API_URL} from "../config";
 @Injectable()
 export class AuthService {
   constructor(public http: Http) { }
@@ -18,20 +19,21 @@ export class AuthService {
     let options = new RequestOptions();
     options.headers=headers;
 
-    return this.http.get(AppComponent.API_URL+"/account/login" ,   options)
+    return this.http.get(API_URL+"/account/login" ,   options)
       .map((response: Response) => {
       // login successful if there's a jwt token in the response
       let user = response.json().principal;// the returned user object is a principal object
       if (user) {
         // store user details  in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('token', base64Credential);
       }
     });
   }
 
   logOut() {
     // remove user from local storage to log user out
-    return this.http.post(AppComponent.API_URL+"logout",{})
+    return this.http.post(API_URL+"logout",{})
       .map((response: Response) => {
         localStorage.removeItem('currentUser');
       });

@@ -1,0 +1,27 @@
+.header {
+  margin: 1em;
+  text-align: center;
+}
+.poll {
+  background-color: #deb887;
+  margin: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.poll__question {
+  width: 80%;
+}
+.actions {
+  display: flex;
+  width: 20%;
+}
+
+.create__button {
+  width: 100%;
+  margin: 1rem;
+}
+
+textarea {
+  resize: none;
+}

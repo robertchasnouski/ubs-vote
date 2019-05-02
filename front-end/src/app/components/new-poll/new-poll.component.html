@@ -1,0 +1,14 @@
+<div class="header">
+      Add new Poll
+</div>
+<mat-card class="poll" [formGroup]="form">
+  <textarea
+    formControlName="question"
+    cdkAutosizeMaxRows="2"
+    class="poll__question">
+  </textarea>
+
+  <div class="actions">
+    <button class="create__button" mat-flat-button (click)="createPoll()">Create</button>
+  </div>
+</mat-card>

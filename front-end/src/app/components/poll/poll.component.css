@@ -1,0 +1,22 @@
+.poll {
+  background-color: #deb887;
+  margin: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+.poll__question {
+}
+.actions {
+  display: flex;
+}
+.actions__vote {
+  background-color: gainsboro;
+  margin: 0.5rem;
+}
+.actions__retry:hover {
+  cursor: pointer;
+}
+
+.actions__vote:disabled {
+  background-color: rgba(255,0,0,0.6);
+}

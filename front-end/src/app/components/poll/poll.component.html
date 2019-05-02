@@ -1,0 +1,26 @@
+<mat-card class="poll">
+  <span class="poll__question">
+    {{poll.question}}
+  </span>
+  <div class="actions">
+
+
+
+    <mat-button-toggle class="actions__vote"
+                       [disabled]="!isRetryVoting"
+                       (click)="sendVote(true)">
+        Yes
+    </mat-button-toggle>
+    <mat-button-toggle class="actions__vote"
+                       (click)="sendVote(false)"
+                       [disabled]="!isRetryVoting">
+        No
+    </mat-button-toggle>
+
+    <div>
+      <span> Favor: {{poll.favorVoteCount}}</span> <br>
+      <span> Underdog: {{poll.underdogVoteCount}}</span>
+    </div>
+
+  </div>
+</mat-card>

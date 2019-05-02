@@ -52,12 +52,16 @@ public class PollController {
     @ResponseBody
     public List<Poll> allPolls(HttpServletRequest request) {
         List<Poll> polls = new ArrayList<>();
-        logger.info("RETURNING POLLS FOR USER:");
+        logger.info("ALL POLS - GET REQUEST");
 
         Principal principal = request.getUserPrincipal();
         User user = userService.find(principal.getName());
         polls = pollService.findUserPolls(user);
 
+        for (int i = 0; i < polls.size(); i++) {
+
+            logger.info("ID:"+polls.get(i).getId()+" ; FAVOR COUNT:"+polls.get(i).getFavorVoteCount());
+        }
         return polls;
     }
 
@@ -66,14 +70,14 @@ public class PollController {
     @RequestMapping(value = "/{pollId}", method = RequestMethod.POST)
     @ResponseBody
     public String userVote(HttpServletRequest request, @PathVariable Long pollId, @RequestBody String body) {
-        logger.info("CHANGING POLL");
+        logger.info("CHANGING POLL - POST REQUEST");
         Principal principal = request.getUserPrincipal();
         Boolean choice = Boolean.parseBoolean((new JSONObject(body)).get("userChoice").toString());
 
         User user = userService.find(principal.getName());
         Poll poll = pollService.find(pollId);
 
-            userPollService.voteForPoll(user, poll, choice);
+        userPollService.voteForPoll(user, poll, choice);
 
 
         return "success";
@@ -85,7 +89,6 @@ public class PollController {
     @ResponseBody
     public List<Poll> test(HttpServletRequest request) {
         List<Poll> polls = new ArrayList<>();
-        logger.info("RETURNING POLLS FOR USER:");
 
         Principal principal = request.getUserPrincipal();
         User user = userService.find(principal.getName());
